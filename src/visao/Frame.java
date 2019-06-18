@@ -22,9 +22,12 @@ public class Frame extends JFrame{
 		this.setSize(900, 590);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		//this.setContentPane(getPanelContatos());
+		//this.add(getPanelContatos().getPanelSuperior());
 		this.setContentPane(getPanelConversa());
 		getContentPane().add(getPanelConversa().getPanelSuperior());
 		getContentPane().add(getPanelConversa().getPanelInferior());
+		//getContentPane().add(getPanelContatos().getPanelSuperior());
 		getContentPane().setLayout(null);
 	}
 
