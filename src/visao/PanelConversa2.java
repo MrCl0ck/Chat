@@ -11,43 +11,37 @@ import javax.swing.JTextArea;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
-import javax.swing.border.LineBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.UIManager;
-import javax.swing.JList;
 //import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class PanelConversa extends JPanel {
+public class PanelConversa2 extends JPanel {
 	private JPanel panelSuperior;
 	private JPanel panelInferior;
 	private JTextArea fieldMensagem;
 	private JButton botaoEnviar;
+	private JButton botaoVoltar;
 	private JLabel labelNome;
 	private JScrollPane scrollCampoMensagem;
-	private JPanel panelEsquerda;
+	private JPanel panel;
 	private JPanel panelContato;
 	private JLabel lblNomesCont;
 	private JButton btnAdicionarContato;
-	private JPanel panelDireita;
-	private JList list;
-	private JList list2;
-	private JScrollPane sclpan;
-	private JScrollPane sclpan2;
 	
-	public PanelConversa() {
+	public PanelConversa2() {
 		this.setBackground(Color.LIGHT_GRAY);
 		this.setLayout(null);
-		add(getPanelEsquerda());
-		add(getPanelDireita());
+		this.add(getPanelSuperior());
+		this.add(getPanelInferior());
+		add(getPanel());
 	}
 	
 	public JPanel getPanelSuperior() {
 		if(panelSuperior == null) {
 			panelSuperior = new JPanel();
-			panelSuperior.setBounds(0, 0, 703, 33);
 			panelSuperior.setBackground(Color.DARK_GRAY);
 			panelSuperior.setLayout(null);
+			panelSuperior.setBounds(200, 0, 700, 50);
+			panelSuperior.add(getBotaoVoltar());
 			panelSuperior.add(getLabelNome());
 		}
 		return panelSuperior;
@@ -60,11 +54,12 @@ public class PanelConversa extends JPanel {
 	public JPanel getPanelInferior() {
 		if(panelInferior == null) {
 			panelInferior = new JPanel();
-			panelInferior.setBounds(0, 492, 703, 100);
 			panelInferior.setBackground(Color.DARK_GRAY);
 			panelInferior.setLayout(null);
-			panelInferior.add(getFieldMensagem());
+			panelInferior.setBounds(200, 475, 700, 100);
+			//panelInferior.add(getFieldMensagem());
 			panelInferior.add(getBotaoEnviar());
+			panelInferior.add(getFieldMensagem());
 			//panelInferior.add(getScrollCampoMensagem());
 		}
 		return panelInferior;
@@ -92,11 +87,10 @@ public class PanelConversa extends JPanel {
 
 	public JButton getBotaoEnviar() {
 		if(botaoEnviar == null) {
-			botaoEnviar = new JButton("");
-			botaoEnviar.setBounds(620, 10, 73, 70);
-			botaoEnviar.setIcon(new ImageIcon(PanelConversa.class.getResource("/com/sun/javafx/scene/control/skin/caspian/images/enter-icon.png")));
+			botaoEnviar = new JButton(">");
 			botaoEnviar.setFont(new Font("", Font.BOLD, 15));
-			botaoEnviar.setBackground(Color.DARK_GRAY);
+			botaoEnviar.setBounds(619, 8, 51, 23);
+			botaoEnviar.setBackground(Color.LIGHT_GRAY);
 			botaoEnviar.setForeground(Color.BLACK);
 		}
 		return botaoEnviar;
@@ -106,15 +100,30 @@ public class PanelConversa extends JPanel {
 		this.botaoEnviar = botaoEnviar;
 	}
 
+	public JButton getBotaoVoltar() {
+		if(botaoVoltar == null) {
+			botaoVoltar = new JButton("Voltar");
+			//botaoVoltar = new JButton(new ImageIcon(getClass().getResource("setaVoltar - Cópia.png")));
+			//botaoVoltar.setText(getLabelSetaVoltar());
+			botaoVoltar.setFont(new Font("Tahoma", Font.BOLD, 10));
+			botaoVoltar.setForeground(Color.WHITE);
+			botaoVoltar.setFocusPainted(false);//Tira o foco do botão.
+			botaoVoltar.setContentAreaFilled(false);//Deixa o botão Transparente.
+			//botaoVoltar.setBorderPainted(false);//Deixa a borda do botão invisível.
+			botaoVoltar.setBounds(10, 11, 70, 32);
+		}
+		return botaoVoltar;
+	}
+
 	public void setBotaoVoltar(JButton botaoVoltar) {
-		//this.botaoVoltar = botaoVoltar;
+		this.botaoVoltar = botaoVoltar;
 	}
 
 	public JLabel getLabelNome() {
 		if(labelNome == null) {
 			labelNome = new JLabel("Nome do Contato");
-			labelNome.setBounds(294, 11, 121, 16);
-			labelNome.setFont(new Font("Tahoma", Font.BOLD, 13));
+			labelNome.setBounds(120, 14, 400, 20);
+			labelNome.setFont(new Font("Tahoma", Font.BOLD, 18));
 			labelNome.setForeground(Color.WHITE);
 		}
 		return labelNome;
@@ -134,18 +143,15 @@ public class PanelConversa extends JPanel {
 	public void setScrollCampoMensagem(JScrollPane scrollCampoMensagem) {
 		this.scrollCampoMensagem = scrollCampoMensagem;
 	}
-	private JPanel getPanelEsquerda() {
-		if (panelEsquerda == null) {
-			panelEsquerda = new JPanel();
-			panelEsquerda.setBorder(new LineBorder(Color.DARK_GRAY));
-			panelEsquerda.setBounds(0, 0, 200, 592);
-			panelEsquerda.setLayout(new BorderLayout(0, 0));
-			panelEsquerda.add(getPanelContato(), BorderLayout.NORTH);
-			panelEsquerda.add(getBtnAdicionarContato(), BorderLayout.SOUTH);
-			panelEsquerda.add(getScrollpaneEsq(), BorderLayout.CENTER);
-			
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.setBounds(0, 0, 200, 592);
+			panel.setLayout(new BorderLayout(0, 0));
+			panel.add(getPanelContato(), BorderLayout.NORTH);
+			panel.add(getBtnAdicionarContato(), BorderLayout.SOUTH);
 		}
-		return panelEsquerda;
+		return panel;
 	}
 	private JPanel getPanelContato() {
 		if (panelContato == null) {
@@ -167,50 +173,8 @@ public class PanelConversa extends JPanel {
 	private JButton getBtnAdicionarContato() {
 		if (btnAdicionarContato == null) {
 			btnAdicionarContato = new JButton("Adicionar contato");
-			btnAdicionarContato.setIcon(new ImageIcon(PanelConversa.class.getResource("/com/sun/javafx/scene/control/skin/modena/dialog-fewer-details.png")));
+			btnAdicionarContato.setIcon(new ImageIcon(PanelConversa2.class.getResource("/com/sun/javafx/scene/control/skin/modena/dialog-fewer-details.png")));
 		}
 		return btnAdicionarContato;
-	}
-	private JPanel getPanelDireita() {
-		if (panelDireita == null) {
-			panelDireita = new JPanel();
-			panelDireita.setBorder(new LineBorder(new Color(64, 64, 64)));
-			panelDireita.setBounds(200, 0, 703, 592);
-			panelDireita.setLayout(null);
-			panelDireita.add(getPanelSuperior());
-			panelDireita.add(getPanelInferior());
-			panelDireita.add(getScrollpaneDir());
-		}
-		return panelDireita;
-	}
-	private JList getListChat() {
-		if (list == null) {
-			list = new JList();
-		}
-		return list;
-	}
-	private JScrollPane getScrollpaneDir() {
-		if(sclpan == null) {
-			sclpan = new JScrollPane();
-			sclpan.setBounds(0, 33, 703, 460);
-			sclpan.setViewportView(getListChat());
-		}
-		return sclpan;
-	}
-	
-	private JList getListContatos() {
-		if (list2 == null) {
-			list2 = new JList();
-		}
-		return list2;
-	}
-	
-	private JScrollPane getScrollpaneEsq() {
-		if(sclpan2 == null) {
-			sclpan2 = new JScrollPane();
-			sclpan2.setViewportView(getListContatos());
-			list.setBounds(0, 0, 196, 527);
-		}
-		return sclpan2;
 	}
 }
